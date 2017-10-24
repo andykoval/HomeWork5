@@ -26,19 +26,7 @@ public class LinkList implements List, Stack, Queue {
         return 0;
     }
 
-    private int size() {
-        int count = 0;
-        if (isEmpty())
-            return 0;
-        Link current = first;
-        while (current != null) {
-            count++;
-            current = current.next;
-        }
-        return count;
-    }
-
-    private Link deliteFirst() {
+        private Link deliteFirst() {
         Link temp = first;
         first = temp.next;
         return temp;
@@ -105,11 +93,14 @@ public class LinkList implements List, Stack, Queue {
     @Override
     public void add(Object obj) {
         Link newLink = new Link(obj);
+        Link current =first;
         if (isEmpty())
             first = newLink;
         else {
-            newLink.next = first;
-            first = newLink;
+            while (current.next!=null){
+                current = current.next;
+            }
+            current.next = newLink;
         }
     }
 
@@ -129,8 +120,15 @@ public class LinkList implements List, Stack, Queue {
     }
 
     @Override
-    public int size(int i) {
-        return 0;
+    public int size() {
+        int count =0;
+        Link current = first;
+        if(isEmpty()) return  0;
+        while (current!=null){
+            count++;
+            current = current.next;
+        }
+        return count;
     }
 
     @Override
@@ -145,29 +143,39 @@ public class LinkList implements List, Stack, Queue {
 
     public static void main(String[] args) {
         LinkList list = new LinkList();
-        list.addFirst( "that is the question");
-        list.addFirst( "?");
-        list.addFirst( "to be");
-        list.addFirst( "or not");
-        list.addFirst( "to be");
-        list.displayList();
-        while (!list.isEmpty()) {
-            Link linkDel = list.deliteFirst();
-            System.out.println("Удален элемент: " + linkDel.data);
-        }
+        list.addFirst("that is the question");
+        list.addFirst("?");
         list.addFirst("to be");
-        list.addFirst( "or not");
-        list.addFirst( "to be");
-        list.addFirst( "?");
-        list.addFirst( "that is the question");
-        list.displayList();
-        list.deliteLink("or not");
+        list.addFirst("or not");
+        list.addFirst("to be");
+        list.addFirst("that is the question");
+        list.addFirst("?");
+        list.addFirst("to be");
+        list.addFirst("or not");
+        list.addFirst("to be");
         list.displayList();
         Link linkF = list.findLink("to be");
         System.out.println("Поиск элемента по объекту: " + "{" + linkF.data + "}");
+        Link linkDel = list.deliteLink("or not");
+        System.out.println("Удален элемент по объекту: " + linkDel.data);
+        System.out.print("Список после удаления: ");
+        list.displayList();
         System.out.println("Размер списка: " + list.size());
         System.out.println("Элемент по индексу: " + list.findLinkInd(2));
-        System.out.println(list.getLast());
+        System.out.println("Последний элемент в списке: " + list.getLast());
+        System.out.println("Удаление всех элементов списка: ");
+        while (!list.isEmpty()) {
+            Link linkDelFirst = list.deliteFirst();
+            System.out.println("Удален элемент: " + linkDelFirst.data);
+        }
+        System.out.println("Список очищен!");
+        list.add("What");
+        list.add("else");
+        list.add("is");
+        list.add("there");
+        list.add("?");
+
+        list.displayList();
     }
 
 }

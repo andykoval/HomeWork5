@@ -7,6 +7,6 @@ public interface List {
     void add(Object obj);
     Object get(int i);
     Object remove(int i);
-    int size(int i);
+    int size();
 
 }
