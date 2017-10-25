@@ -5,21 +5,21 @@ package com.company;
  */
 public class ArrayList implements List, Stack, Queue {
 
-    Object[] arrlist;
-    int size;
+    private Object[] arrlist;
+    private int size;
 
     private ArrayList(int size) {
         arrlist = new Object[size];
         this.size = size;
     }
 
-    void displayList() {
+    private void displayList() {
         int count = 0;
         if (arrlist[count] == null) {
             System.out.println("Пустой массив");
             return;
         }
-        System.out.print("\nЭлементы масива: ");
+        System.out.print("\nЭлементы масcива: ");
         while (arrlist[count] != null) {
             System.out.print(arrlist[count] + " ");
             count++;
@@ -51,9 +51,9 @@ public class ArrayList implements List, Stack, Queue {
         if (arrlist[0] == null)
             return null;
         Object temp = arrlist[0];
-        Object[] tmp = new Object[size-1];
-        for (int i =1 ; i<size-1;i++)
-            tmp[i-1]=arrlist[i];
+        Object[] tmp = new Object[size - 1];
+        for (int i = 1; i < size - 1; i++)
+            tmp[i - 1] = arrlist[i];
         arrlist = tmp;
         return temp;
     }
@@ -61,7 +61,7 @@ public class ArrayList implements List, Stack, Queue {
     @Override
     public Object get(int i) {
         int count = 0;
-        while (count!=i)
+        while (count != i)
             count++;
         if (arrlist[count] == null)
             return null;
@@ -70,16 +70,16 @@ public class ArrayList implements List, Stack, Queue {
 
     @Override
     public Object remove(int i) {
-        int count =0;
-        while (count!=i)
+        int count = 0;
+        while (count != i)
             count++;
         Object temp = arrlist[count];
-        Object[] tmp = new Object[size-1];
-        for (int j = 0; j<count; j++)
-            tmp[j]= arrlist[j];
-        for (int j = count; j<size-2; j++)
-            tmp[j]= arrlist[j+1];
-        arrlist=tmp;
+        Object[] tmp = new Object[size - 1];
+        for (int j = 0; j < count; j++)
+            tmp[j] = arrlist[j];
+        for (int j = count; j < size - 2; j++)
+            tmp[j] = arrlist[j + 1];
+        arrlist = tmp;
         return temp;
     }
 
@@ -93,13 +93,33 @@ public class ArrayList implements List, Stack, Queue {
 
     @Override
     public void push(Object obj) {
-        
-
+        int count = 0;
+        if (arrlist[count] == null) {
+            arrlist[count] = obj;
+            return;
+        } else {
+            Object[] tmp = new Object[size + 1];
+            tmp[0] = obj;
+            for (int i = 0; i < size - 1; i++) {
+                tmp[i + 1] = arrlist[i];
+            }
+            arrlist = tmp;
+        }
     }
 
     @Override
     public Object pop() {
-        return null;
+        int count = 0;
+        Object temp = arrlist[0];
+        if (arrlist[count] == null)
+            return null;
+        else {
+            Object[] tmp = new Object[size - 1];
+            for (int i = 0; i < size - 2; i++)
+                tmp[i] = arrlist[i + 1];
+            arrlist = tmp;
+        }
+        return temp;
     }
 
     public static void main(String[] args) {
@@ -123,9 +143,14 @@ public class ArrayList implements List, Stack, Queue {
         System.out.println(arrayList.poll());
         System.out.println(arrayList.poll());
         arrayList.displayList();
-        System.out.println("Размер масива: " + arrayList.size());
+        System.out.println("Размер масcива: " + arrayList.size());
         System.out.println("Элемент по индексу: " + arrayList.get(4));
-        System.out.println("Удаление элемента по индексу: "+ arrayList.remove(5));
+        System.out.println("Удаление элемента по индексу: " + arrayList.remove(5));
+        arrayList.displayList();
+        arrayList.push("STACKadd1");
+        arrayList.push("STACKadd2");
+        arrayList.displayList();
+        arrayList.pop();
         arrayList.displayList();
 
     }
