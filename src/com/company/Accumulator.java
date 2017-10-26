@@ -21,7 +21,24 @@ public class Accumulator {
     }
 
     public static void main(String[] args) {
-        Accumulator acc1 = new Accumulator(3, new Power());
+        Operation p = new Power(){
+            @Override
+            int doOperation(int x, int y) {
+                System.out.println("I can owerride this!!");
+                result = (int) Math.pow(x, y+10);
+                return result;
+            }
+        };
+        Operation d = new Divide(){
+            @Override
+            int doOperation(int x, int y) {
+                System.out.println("And this!");
+                result = x / y;
+                return result;
+            }
+        };
+//
+        Accumulator acc1 = new Accumulator(3, p);
         acc1.accumulate(4);
         System.out.println("Power result: " + acc1.getValue());
 
@@ -29,7 +46,7 @@ public class Accumulator {
         acc2.accumulate(9);
         System.out.println("Plus result: " + acc2.getValue());
 
-        Accumulator acc3 = new Accumulator(20, new Divide());
+        Accumulator acc3 = new Accumulator(20, d);
         acc3.accumulate(5);
         System.out.println("Divide result: " + acc3.getValue());
 

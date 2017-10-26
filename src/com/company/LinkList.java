@@ -1,5 +1,10 @@
 package com.company;
 
+import java.lang.reflect.Type;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 /**
  * Created by andy on 22.10.2017.
  */
@@ -178,6 +183,46 @@ public class LinkList implements List, Stack, Queue {
         return current;
     }
 
+    @Override
+    public Iterator iterator() {
+        Iterator it = new Iterator() {
+            int currentindex = 0;
+//            int size = size();
+
+            @Override
+            public boolean hasNext() {
+                int index = 0;
+                Link current = first;
+                while (index != currentindex) {
+                    index++;
+                    current = current.next;
+                }
+                return current.next != null;
+            }
+
+            @Override
+            public Object next() {
+                int index = 0;
+                Link current = first;
+                if (current == null)
+                    return null;
+                if(first.next==null){
+                    currentindex++;
+                    return current;
+                }
+                while (index != currentindex) {
+                    index++;
+                    current = current.next;
+                }
+                currentindex++;
+                return current;
+
+            }
+        };
+        return it;
+    }
+
+
     public static void main(String[] args) {
         LinkList list = new LinkList();
 //        list.addFirst("that is the question");
@@ -217,7 +262,7 @@ public class LinkList implements List, Stack, Queue {
         System.out.println("Размер: " + list.size());
         System.out.println("\tУдаление элементов очереди");
         int size = list.size();
-        for (int j = 0; j < size; j++){
+        for (int j = 0; j < size; j++) {
             list.poll();
             list.displayList();
         }
@@ -239,6 +284,20 @@ public class LinkList implements List, Stack, Queue {
         list.displayList();
         System.out.println("\tВывод на экран одного элемента стека по индексу");
         System.out.println(list.get(1));
+        LinkList listIter = new LinkList();
+        listIter.add("Lets");
+        listIter.add("test");
+        listIter.add("iter");
+        listIter.displayList();
+        Iterator listIt = listIter.iterator();
+        Object a = new Object();
+        System.out.println(a.toString());
+//        System.out.println( listIt.next() + " " + listIt.hasNext());
+        while (listIt.hasNext())
+            System.out.println(listIt.next().toString());
+//        Iterator it = list.iterator();
+//        System.out.println(it.next());
+
     }
 
 }

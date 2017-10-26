@@ -1,5 +1,10 @@
 package com.company;
 
+import java.lang.reflect.Type;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 /**
  * ArrayList
  */
@@ -118,9 +123,27 @@ public class ArrayList implements List, Stack, Queue {
             return null;
         else {
             System.arraycopy(arrlist, 1, arrlist, 0, arrlist.length - 2);
-            arrlist[arrlist.length - 1] = null;
+            arrlist[arrlist.length - 2] = null;
         }
         return temp;
+    }
+    @Override
+    public Iterator iterator() {
+        Iterator  it = new Iterator() {
+            int currentindex = 0;
+//            int size = size();
+
+            @Override
+            public boolean hasNext() {
+                return currentindex < arrlist.length && arrlist[currentindex]!=null;
+            }
+
+            @Override
+            public Object next() {
+                return arrlist[currentindex++];
+            }
+        };
+        return it;
     }
 
     public static void main(String[] args) {
@@ -168,6 +191,23 @@ public class ArrayList implements List, Stack, Queue {
         for (int i = 0; i < 10; i++)
             arrayList.pop();
         arrayList.displayList();
+
+
+        ArrayList listIter = new ArrayList(10);
+        Iterator it = listIter.iterator();
+        listIter.add("Lets");
+        listIter.add("test");
+        listIter.add("iter");
+        listIter.displayList();
+        while (it.hasNext()){
+            Object o = it.next();
+            System.out.println(o);
+        }
+        for(Object o: listIter)
+            System.out.println(o);
+
+
+//        System.out.println("sdadsa "+it.next()+" "+it.hasNext());
 
     }
 }
