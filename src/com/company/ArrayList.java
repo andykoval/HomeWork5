@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by andy on 25.10.2017.
+ * ArrayList
  */
 public class ArrayList implements List, Stack, Queue {
 
@@ -48,13 +48,13 @@ public class ArrayList implements List, Stack, Queue {
     @Override
     public Object poll() {
         int count = 0;
-        if (arrlist[0] == null)
-            return null;
         Object temp = arrlist[0];
-        Object[] tmp = new Object[size - 1];
-        for (int i = 1; i < size - 1; i++)
-            tmp[i - 1] = arrlist[i];
-        arrlist = tmp;
+        if (arrlist[count] == null)
+            return null;
+        else {
+            System.arraycopy(arrlist, 1, arrlist, 0, arrlist.length - 2);
+            arrlist[arrlist.length - 1] = null;
+        }
         return temp;
     }
 
@@ -74,12 +74,8 @@ public class ArrayList implements List, Stack, Queue {
         while (count != i)
             count++;
         Object temp = arrlist[count];
-        Object[] tmp = new Object[size - 1];
-        for (int j = 0; j < count; j++)
-            tmp[j] = arrlist[j];
-        for (int j = count; j < size - 2; j++)
-            tmp[j] = arrlist[j + 1];
-        arrlist = tmp;
+        System.arraycopy(arrlist, count + 1, arrlist, count, arrlist.length - (count + 1));
+        arrlist[arrlist.length - 1] = null;
         return temp;
     }
 
@@ -96,14 +92,21 @@ public class ArrayList implements List, Stack, Queue {
         int count = 0;
         if (arrlist[count] == null) {
             arrlist[count] = obj;
-            return;
         } else {
-            Object[] tmp = new Object[size + 1];
-            tmp[0] = obj;
-            for (int i = 0; i < size - 1; i++) {
-                tmp[i + 1] = arrlist[i];
+            while (arrlist[count] != null) {
+                count++;
+                if (count == arrlist.length - 1) {
+                    size = (size * 3) / 2 + 1;
+                    Object[] tmp = new Object[size];
+                    tmp[0] = obj;
+                    System.arraycopy(arrlist, 0, tmp, 0, arrlist.length);
+                    arrlist = tmp;
+                } else if (arrlist[count] == null) {
+                    System.arraycopy(arrlist, 0, arrlist, 1, arrlist.length - 1);
+                    arrlist[0] = obj;
+                    return;
+                }
             }
-            arrlist = tmp;
         }
     }
 
@@ -114,10 +117,8 @@ public class ArrayList implements List, Stack, Queue {
         if (arrlist[count] == null)
             return null;
         else {
-            Object[] tmp = new Object[size - 1];
-            for (int i = 0; i < size - 2; i++)
-                tmp[i] = arrlist[i + 1];
-            arrlist = tmp;
+            System.arraycopy(arrlist, 1, arrlist, 0, arrlist.length - 2);
+            arrlist[arrlist.length - 1] = null;
         }
         return temp;
     }
@@ -149,8 +150,23 @@ public class ArrayList implements List, Stack, Queue {
         arrayList.displayList();
         arrayList.push("STACKadd1");
         arrayList.push("STACKadd2");
+        arrayList.push("STACKadd3");
+        arrayList.push("STACKadd4");
+        arrayList.push("STACKadd5");
+        arrayList.push("STACKadd6");
+        arrayList.push("STACKadd7");
+        arrayList.push("STACKadd8");
+        arrayList.push("STACKadd9");
+        arrayList.push("STACKadd10");
+        arrayList.push("STACKadd11");
+        arrayList.push("STACKadd12");
+        arrayList.push("STACKadd13");
+        arrayList.push("STACKadd14");
+        arrayList.push("STACKadd15");
+        arrayList.push("STACKadd16");
         arrayList.displayList();
-        arrayList.pop();
+        for (int i = 0; i < 10; i++)
+            arrayList.pop();
         arrayList.displayList();
 
     }
