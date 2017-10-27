@@ -203,11 +203,9 @@ public class ArrayList implements List, Stack, Queue {
             Object o = it.next();
             System.out.println(o);
         }
+        System.out.println();
         for(Object o: listIter)
             System.out.println(o);
-
-
-//        System.out.println("sdadsa "+it.next()+" "+it.hasNext());
 
     }
 }

@@ -1,5 +1,7 @@
 package com.company;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.lang.reflect.Type;
 import java.util.Iterator;
 import java.util.Spliterator;
@@ -197,7 +199,7 @@ public class LinkList implements List, Stack, Queue {
                     index++;
                     current = current.next;
                 }
-                return current.next != null;
+                return current != null;
             }
 
             @Override
@@ -210,12 +212,15 @@ public class LinkList implements List, Stack, Queue {
                     currentindex++;
                     return current;
                 }
+
                 while (index != currentindex) {
+                    if (currentindex==0)
+                        break;
                     index++;
                     current = current.next;
                 }
                 currentindex++;
-                return current;
+                return current.data;
 
             }
         };
@@ -288,16 +293,17 @@ public class LinkList implements List, Stack, Queue {
         listIter.add("Lets");
         listIter.add("test");
         listIter.add("iter");
+        listIter.add("iter");
+        listIter.add("iter");
         listIter.displayList();
         Iterator listIt = listIter.iterator();
-        Object a = new Object();
-        System.out.println(a.toString());
-//        System.out.println( listIt.next() + " " + listIt.hasNext());
-        while (listIt.hasNext())
-            System.out.println(listIt.next().toString());
-//        Iterator it = list.iterator();
-//        System.out.println(it.next());
+        while (listIt.hasNext()){
+            Object o = listIt.next();
+            System.out.println(o);
+        }
+        System.out.println();
+        for(Object o: listIter)
+            System.out.println(o);
 
     }
-
 }
