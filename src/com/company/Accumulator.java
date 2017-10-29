@@ -4,20 +4,22 @@ package com.company;
  * Created by andy on 22.10.2017.
  */
 public class Accumulator {
-    private int value, valueAcc;
+    private int value;
     private Operation oper;
 
-    Accumulator(int value, Operation oper) {
+    public Accumulator(int value, Operation oper) {
         this.oper = oper;
         this.value = value;
     }
 
-    public void accumulate(int valueAcc) {
-        this.valueAcc = valueAcc;
+    private void accumulate(int arg) {
+
+        value = oper.doOperation(value, arg);
     }
 
-    public int getValue() {
-        return oper.doOperation(value, valueAcc);
+    private int getValue() {
+
+        return value;
     }
 
     public static void main(String[] args) {

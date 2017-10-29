@@ -185,48 +185,71 @@ public class LinkList implements List, Stack, Queue {
         return current;
     }
 
-    @Override
-    public Iterator iterator() {
-        Iterator it = new Iterator() {
-            int currentindex = 0;
-//            int size = size();
+    //    @Override
+//    public Iterator iterator() {
+//        Iterator it = new Iterator() {
+//            int currentindex = 0;
+////            int size = size();
+//
+//            @Override
+//            public boolean hasNext() {
+//                int index = 0;
+//                Link current = first;
+//                while (index != currentindex) {
+//                    index++;
+//                    current = current.next;
+//                }
+//                return current != null;
+//            }
+//
+//            @Override
+//            public Object next() {
+//                int index = 0;
+//                Link current = first;
+//                if (current == null)
+//                    return null;
+//                if(first.next==null){
+//                    currentindex++;
+//                    return current;
+//                }
+//
+//                while (index != currentindex) {
+//                    if (currentindex==0)
+//                        break;
+//                    index++;
+//                    current = current.next;
+//                }
+//                currentindex++;
+//                return current.data;
+//
+//            }
+//        };
+//        return it;
+//    }
+    public class IteratorNew implements Iterator {
+        Link next;
 
-            @Override
-            public boolean hasNext() {
-                int index = 0;
-                Link current = first;
-                while (index != currentindex) {
-                    index++;
-                    current = current.next;
-                }
-                return current != null;
-            }
+        public IteratorNew(Link next) {
+            this.next = next;
+        }
 
-            @Override
-            public Object next() {
-                int index = 0;
-                Link current = first;
-                if (current == null)
-                    return null;
-                if(first.next==null){
-                    currentindex++;
-                    return current;
-                }
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
 
-                while (index != currentindex) {
-                    if (currentindex==0)
-                        break;
-                    index++;
-                    current = current.next;
-                }
-                currentindex++;
-                return current.data;
-
-            }
-        };
-        return it;
+        @Override
+        public Object next() {
+            Link res = next;
+            next = next.next;
+            return res.data;
+        }
     }
 
+    @Override
+    public Iterator iterator() {
+        return new IteratorNew(first);
+    }
 
     public static void main(String[] args) {
         LinkList list = new LinkList();
@@ -296,14 +319,18 @@ public class LinkList implements List, Stack, Queue {
         listIter.add("iter");
         listIter.add("iter");
         listIter.displayList();
-        Iterator listIt = listIter.iterator();
-        while (listIt.hasNext()){
-            Object o = listIt.next();
-            System.out.println(o);
-        }
-        System.out.println();
-        for(Object o: listIter)
-            System.out.println(o);
+//        Iterator listIt = listIter.iterator();
+//        while (listIt.hasNext()){
+//            Object o = listIt.next();
+//            System.out.println(o);
+//        }
+//        System.out.println();
+//        for(Object o: listIter)
+//            System.out.println(o);
+        Iterator iter = listIter.iterator();
+        while (iter.hasNext())
+            System.out.println(iter.next());
+
 
     }
 }

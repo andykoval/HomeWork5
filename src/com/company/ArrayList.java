@@ -127,23 +127,44 @@ public class ArrayList implements List, Stack, Queue {
         }
         return temp;
     }
+
+    //    @Override
+//    public Iterator iterator() {
+//        Iterator  it = new Iterator() {
+//            int currentindex = 0;
+////            int size = size();
+//
+//            @Override
+//            public boolean hasNext() {
+//                return currentindex < arrlist.length && arrlist[currentindex]!=null;
+//            }
+//
+//            @Override
+//            public Object next() {
+//                return arrlist[currentindex++];
+//            }
+//        };
+//        return it;
+//    }
+    public class IteratorNew implements Iterator {
+        int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return arrlist[index] != null;
+        }
+
+        @Override
+        public Object next() {
+            Object res = arrlist[index];
+            arrlist[index] = arrlist[index++];
+            return res;
+        }
+    }
+
     @Override
     public Iterator iterator() {
-        Iterator  it = new Iterator() {
-            int currentindex = 0;
-//            int size = size();
-
-            @Override
-            public boolean hasNext() {
-                return currentindex < arrlist.length && arrlist[currentindex]!=null;
-            }
-
-            @Override
-            public Object next() {
-                return arrlist[currentindex++];
-            }
-        };
-        return it;
+        return new ArrayList.IteratorNew();
     }
 
     public static void main(String[] args) {
@@ -192,20 +213,19 @@ public class ArrayList implements List, Stack, Queue {
             arrayList.pop();
         arrayList.displayList();
 
-
         ArrayList listIter = new ArrayList(10);
         Iterator it = listIter.iterator();
         listIter.add("Lets");
         listIter.add("test");
         listIter.add("iter");
         listIter.displayList();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             Object o = it.next();
             System.out.println(o);
         }
-        System.out.println();
-        for(Object o: listIter)
-            System.out.println(o);
+//        System.out.println();
+//        for (Object o : listIter)
+//            System.out.println(o);
 
     }
 }
