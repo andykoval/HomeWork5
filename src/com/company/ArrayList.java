@@ -10,15 +10,16 @@ import java.util.function.Consumer;
  */
 public class ArrayList implements List, Stack, Queue {
 
-    private Object[] arrlist;
-    private int size;
+    public Object[] arrlist;
+    public int size;
 
-    private ArrayList(int size) {
+    public ArrayList(int size) {
         arrlist = new Object[size];
         this.size = size;
     }
 
-    private void displayList() {
+    @Override
+    public void displayList() {
         int count = 0;
         if (arrlist[count] == null) {
             System.out.println("Пустой массив");

@@ -40,7 +40,8 @@ public class LinkList implements List, Stack, Queue {
 //    }
 
     //метод отображает элементы списка
-    private void displayList() {
+    @Override
+    public void displayList() {
         Link newLink;
         newLink = first;
         System.out.print("Элементы списка: ");
