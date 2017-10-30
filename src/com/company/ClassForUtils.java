@@ -37,5 +37,8 @@ public class ClassForUtils {
             }
         }, list);
         list3.displayList();
+        Object arr[] = new Object[]{"sun", "automn", "spring", "house"};
+        List list4 = Utils.toList(arr);
+        list4.displayList();
     }
 }
