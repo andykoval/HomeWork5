@@ -37,8 +37,15 @@ public class ClassForUtils {
             }
         }, list);
         list3.displayList();
-        Object arr[] = new Object[]{"sun", "automn", "spring", "house"};
+        Object arr[] = new Object[]{"sun", "automn", "aa","spring", "house", "88", "yes"};
         List list4 = Utils.toList(arr);
         list4.displayList();
+        List list5 = Utils.intersect(list4, list3, new Predicate2(){
+            @Override
+            public boolean applyTwo(Object ob1, Object ob2) {
+                return ob1.equals(ob2);
+            }
+        });
+        list5.displayList();
     }
 }
