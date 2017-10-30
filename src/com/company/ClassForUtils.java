@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.File;
 import java.util.Iterator;
 
 /**
@@ -37,22 +38,37 @@ public class ClassForUtils {
             }
         }, list);
         list3.displayList();
-        Object arr[] = new Object[]{"sun", "automn", "aa","spring", "house", "88", "yes"};
+        Object arr[] = new Object[]{"sun", "automn", "aa", "spring", "house", "88", "yes"};
         List list4 = Utils.toList(arr);
         list4.displayList();
-        List list5 = Utils.intersect(list4, list3, new Predicate2(){
+        List list5 = Utils.intersect(list4, list3, new Predicate2() {
             @Override
             public boolean applyTwo(Object ob1, Object ob2) {
                 return ob1.equals(ob2);
             }
         });
         list5.displayList();
-        List list6 = Utils.difference(list3, list4, new Predicate2(){
+        List list6 = Utils.difference(list3, list4, new Predicate2() {
             @Override
             public boolean applyTwo(Object ob1, Object ob2) {
                 return ob1.equals(ob2);
             }
         });
         list6.displayList();
+        File dir1 = new File("c:/dir1");
+        File dir2 = new File("c:/dir2");
+        System.out.println(dir1.mkdir() + " " + dir2.mkdir());
+
+        List files1 = Utils.toList(dir1.listFiles());
+        List files2 = Utils.toList(dir2.listFiles());
+        files1.displayList();
+        files2.displayList();
+        List duplicated = Utils.difference(files1, files2, new Predicate2() {
+            @Override
+            public boolean applyTwo(Object ob1, Object ob2) {
+                return ob1.equals(ob2);
+            }
+        });
+        duplicated.displayList();
     }
 }
