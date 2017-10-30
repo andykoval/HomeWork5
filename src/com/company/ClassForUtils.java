@@ -47,5 +47,12 @@ public class ClassForUtils {
             }
         });
         list5.displayList();
+        List list6 = Utils.difference(list3, list4, new Predicate2(){
+            @Override
+            public boolean applyTwo(Object ob1, Object ob2) {
+                return ob1.equals(ob2);
+            }
+        });
+        list6.displayList();
     }
 }
