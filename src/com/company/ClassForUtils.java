@@ -70,5 +70,60 @@ public class ClassForUtils {
             }
         });
         duplicated.displayList();
+        List list7 = new LinkList();
+        List list8 = new LinkList();
+        List list9 = new LinkList();
+
+        list7.add(1);
+        list7.add(2);
+        list7.add(3);
+        list7.add(77);
+
+        list8.add(4);
+        list8.add(5);
+        list8.add(6);
+
+        list9.add(7);
+        list9.add(8);
+        list9.add(9);
+
+        Iterator view = Utils.viewIterator(list7, list7, list8, list9);
+
+        while (view.hasNext())
+            System.out.println(view.next());
+
+        System.out.println("== Iterable ==");
+
+        // Iterable
+        for (Object o : Utils.view(list7, list8, list9)) {
+            System.out.println(o);
+        }
+        System.out.println();
+        Iterator filterIterator = Utils.filterIterator(list7, new Predicate() {
+            @Override
+            public boolean apply(Object obj) {
+                return obj.toString().length()==2;
+            }
+        });
+        while (filterIterator.hasNext())
+        System.out.println(filterIterator.next());
+        System.out.println();
+
+        for (Object o : Utils.filterView(list7, new Predicate() {
+            @Override
+            public boolean apply(Object obj) {
+                return obj.toString().length() == 2;
+            }
+        })) {
+            System.out.println(o);
+        }
+
+
+//
+//        for (Object o : Utils.view(list7, list8, list9)) {
+//            System.out.println(o);
+//        }
+
+
     }
 }
