@@ -105,6 +105,7 @@ public class ClassForUtils {
                 return obj.toString().length()==2;
             }
         });
+
         while (filterIterator.hasNext())
         System.out.println(filterIterator.next());
         System.out.println();
