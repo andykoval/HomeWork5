@@ -9,6 +9,10 @@ import java.util.Iterator;
 
 public class ClassForUtils {
 
+    public ClassForUtils() {
+        super();
+    }
+
     public static void main(String[] args) {
         List list = new LinkList();
         list.add("a");
@@ -83,9 +87,11 @@ public class ClassForUtils {
         list8.add(5);
         list8.add(6);
 
-        list9.add(7);
-        list9.add(8);
+        list9.add(70);
+        list9.add(80);
         list9.add(9);
+        list9.add(15);
+        list9.add(32);
 
         Iterator view = Utils.viewIterator(list7, list7, list8, list9);
 
@@ -98,33 +104,41 @@ public class ClassForUtils {
         for (Object o : Utils.view(list7, list8, list9)) {
             System.out.println(o);
         }
-        System.out.println();
-        Iterator filterIterator = Utils.filterIterator(list7, new Predicate() {
+        System.out.println("== FilterIt ==");
+                Iterator filterIterator = Utils.filterIterator(list9, new Predicate() {
             @Override
             public boolean apply(Object obj) {
-                return obj.toString().length()==2;
+                return (int) obj % 2 == 0;
             }
         });
 
         while (filterIterator.hasNext())
-        System.out.println(filterIterator.next());
+            System.out.println(filterIterator.next());
         System.out.println();
 
-        for (Object o : Utils.filterView(list7, new Predicate() {
+        for (Object o : Utils.filterView(list9, new Predicate() {
             @Override
             public boolean apply(Object obj) {
-                return obj.toString().length() == 2;
+                return (int) obj % 2 == 0;
             }
         })) {
             System.out.println(o);
         }
-
-
-//
-//        for (Object o : Utils.view(list7, list8, list9)) {
-//            System.out.println(o);
-//        }
-
-
+        System.out.println("== TransformerIt ==");
+        Iterator transformIter = Utils.transformIterator(list9, new Transformer() {
+            @Override
+            public Object trans(Object obj) {
+                return String.valueOf(((int) obj) / 5);
+            }
+        });
+        while (transformIter.hasNext())
+            System.out.println(transformIter.next());
+        for (Object o : Utils.transformView(list9, new Transformer() {
+            @Override
+            public Object trans(Object obj) {
+                return String.valueOf(((int) obj) / 5);
+            }
+        }))
+            System.out.println(o);
     }
 }
